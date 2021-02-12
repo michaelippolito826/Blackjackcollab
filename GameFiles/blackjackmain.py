@@ -24,8 +24,8 @@ class deck:
     def __init__(self):
         self.cards = [card(suit, value) 
                       for suit in ["Spades", "Clubs", "Hearts", "Diamonds"]
-                        # for value in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
-                        for value in ["A", "K"]]
+                        for value in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
+                        # for value in ["A", "K"]]
     
     def shuffle(self):
         if len(self.cards) > 1:
