@@ -141,12 +141,14 @@ class Gameloop:
                 player_has_blackjack = self.check_for_blackjack()
                 dealer_has_blackjack = self.check_for_blackjack()
                 
-                if player_has_blackjack or dealer_has_blackjack:
+                if player_has_blackjack == True or dealer_has_blackjack == True:
                     game_over = True
                     
                     self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
                     self.final_results()  
-            
+                else:
+                    break
+
             if game_over == True:
                 again = input("Play again? [y/n]\n")
                 while again.lower() not in ["y", "n"]:
