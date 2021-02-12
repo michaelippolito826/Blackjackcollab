@@ -90,11 +90,12 @@ class Gameloop:
     
     def dealer_draw(self):
         dealer_hand_value = self.dealer_hand.get_value()
+        print("Dealer's hand is:")
         if dealer_hand_value < 17:
-            while dealer_hand_value < 21:
+            while dealer_hand_value < 17:
                 self.dealer_hand.add_card(self.deck.deal())
                 dealer_hand_value = self.dealer_hand.get_value()
-                if dealer_hand_value >= 21:
+                if dealer_hand_value >= 17:
                     break
         self.dealer_hand.reveal()
     
