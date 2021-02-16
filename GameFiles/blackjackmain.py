@@ -14,10 +14,8 @@ class card:
     def __init__(self, suit, value):
         self.suit = suit
         self.value = value
-        #combined = [self.value, self.suit]
     
     def __repr__(self):
-        #return " of ".join(self.value, self.suit)
         return self.value + " of " + self.suit
 
 class deck:
