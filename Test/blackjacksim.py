@@ -58,10 +58,6 @@ class hand:
         self.calculate_value()
         return self.value
 
-    def dealer_face_card(self):
-        face_card = self.cards[1]
-        self.get_value()
-
 class Gameloop:
     def __init__(self):
         pass
@@ -74,6 +70,7 @@ class Gameloop:
                 dealer_hand_value = self.dealer_hand.get_value()
                 if dealer_hand_value >= 17:
                     break
+    
     
     def final_results(self):
         dealer_hand_value = self.dealer_hand.get_value()
@@ -92,9 +89,9 @@ class Gameloop:
         # game_over = True            
                 
     def play(self):
-        playing = True
+        simulating = True
         
-        while playing:
+        while simulating:
             self.deck = deck()
             self.deck.shuffle()
         
@@ -113,20 +110,18 @@ class Gameloop:
 
                 dealer_hand_value = self.dealer_hand.get_value()
                 player_hand_value = self.player_hand.get_value()
+
+                dealer_face_value = dealer_hand[1]
                 
                 if player_has_blackjack == True or dealer_has_blackjack == True:
                     game_over = True
                     self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
+                if player_hand_value <= 21:
+            # and (self.dealer_hand.dealer_face_value() == 2 or self.dealer_hand.dealer_face_value() == 3):
+                    print(self.dealer_hand.dealer_hand_value())
+                    self.player_hand.add_card(self.deck.deal())
                 else:
                     break
-            
-            if player_hand_value <= 13:
-            # and (self.dealer_hand.dealer_face_value() == 2 or self.dealer_hand.dealer_face_value() == 3):
-                print(self.dealer_hand.dealer_face_card())
-                self.player_hand.add_card(self.deck.deal())
-                game_over = True
-            else:
-                playing = False
                     
     def check_for_blackjack(self):
         player_has_blackjack = False
@@ -137,6 +132,16 @@ class Gameloop:
             dealer_has_blackjack = True
 
         return player_has_blackjack, dealer_has_blackjack
+    
+    def show_blackjack_results(self, player_has_blackjack, dealer_has_blackjack):
+        if player_has_blackjack == (True, True) and dealer_has_blackjack == (True, True):
+            print("Both players have blackjack! It is a draw!")
+        
+        elif player_has_blackjack == (True, False):
+            print("You have blackjack! You win!")
+        
+        elif dealer_has_blackjack == (False, True):
+            print("Dealer has blackjack! Dealer wins!")
 
     def player_is_over(self):
         return self.player_hand.get_value() > 21   
