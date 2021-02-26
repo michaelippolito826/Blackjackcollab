@@ -72,22 +72,32 @@ class Gameloop:
                     break
     
     
-    def final_results(self):
+    # def final_results(self):
+    #     dealer_hand_value = self.dealer_hand.get_value()
+    #     player_hand_value = self.player_hand.get_value()
+    #     print('****************************************************')
+    #     print("Final Results")
+    #     print("Your hand:", player_hand_value)
+    #     print("Dealer's hand:", dealer_hand_value)
+        
+    #     if dealer_hand_value > 21 or player_hand_value > dealer_hand_value:
+    #         print("You Win!")
+    #     elif player_hand_value == dealer_hand_value:
+    #         print("Tie!")    
+    #     else:
+    #         print("Dealer Wins!")
+    #     # game_over = True  
+              
+    def hit_or_stay(self):
         dealer_hand_value = self.dealer_hand.get_value()
         player_hand_value = self.player_hand.get_value()
-        print('****************************************************')
-        print("Final Results")
-        print("Your hand:", player_hand_value)
-        print("Dealer's hand:", dealer_hand_value)
-        
-        if dealer_hand_value > 21 or player_hand_value > dealer_hand_value:
-            print("You Win!")
-        elif player_hand_value == dealer_hand_value:
-            print("Tie!")    
-        else:
-            print("Dealer Wins!")
-        # game_over = True            
-                
+
+        if (dealer_hand_value == 2 or dealer_hand_value == 3) and (player_hand_value < 13):
+            print("dealer = 2 or 3 and player <13")
+        elif (dealer_hand_value == 4 or dealer_hand_value == 5 or dealer_hand_value == 6) and (player_hand_value < 12):
+            print("dealer = 4,5,6 and player<12")
+        elif (dealer_hand_value == ) 
+
     def play(self):
         simulating = True
         
@@ -107,19 +117,10 @@ class Gameloop:
             while not game_over:
                 player_has_blackjack = self.check_for_blackjack()
                 dealer_has_blackjack = self.check_for_blackjack()
-
-                dealer_hand_value = self.dealer_hand.get_value()
-                player_hand_value = self.player_hand.get_value()
-
-                dealer_face_value = dealer_hand[1]
                 
                 if player_has_blackjack == True or dealer_has_blackjack == True:
                     game_over = True
                     self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
-                if player_hand_value <= 21:
-            # and (self.dealer_hand.dealer_face_value() == 2 or self.dealer_hand.dealer_face_value() == 3):
-                    print(self.dealer_hand.dealer_hand_value())
-                    self.player_hand.add_card(self.deck.deal())
                 else:
                     break
                     
