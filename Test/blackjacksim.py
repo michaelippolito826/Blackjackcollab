@@ -92,11 +92,32 @@ class Gameloop:
         dealer_hand_value = self.dealer_hand.get_value()
         player_hand_value = self.player_hand.get_value()
 
-        if (dealer_hand_value == 2 or dealer_hand_value == 3) and (player_hand_value < 13):
-            print("dealer = 2 or 3 and player <13")
-        elif (dealer_hand_value == 4 or dealer_hand_value == 5 or dealer_hand_value == 6) and (player_hand_value < 12):
-            print("dealer = 4,5,6 and player<12")
-        elif (dealer_hand_value == ) 
+        stay = False
+
+        while stay == False:
+            if (dealer_hand_value == 2 or dealer_hand_value == 3) and (player_hand_value < 13):
+                print("dealer = 2 or 3 and player <13")
+                print(dealer_hand_value)
+                print(player_hand_value)
+                self.player_hand.add_card(self.deck.deal())
+
+            elif (dealer_hand_value == 4 or dealer_hand_value == 5 or dealer_hand_value == 6) and (player_hand_value < 12):
+                print("dealer = 4,5,6 and player<12")
+                print(dealer_hand_value)
+                print(player_hand_value)
+                self.player_hand.add_card(self.deck.deal())
+
+            elif (dealer_hand_value >= 7 and dealer_hand_value <= 10) and (player_hand_value < 17):
+                print("dealer = 7-A and player<17")
+                print(dealer_hand_value)
+                print(player_hand_value)
+                self.player_hand.add_card(self.deck.deal())
+
+            else:
+                stay = True
+                print("stay")
+                print(dealer_hand_value)
+                print(player_hand_value)
 
     def play(self):
         simulating = True
@@ -108,10 +129,14 @@ class Gameloop:
             self.player_hand = hand()
             self.dealer_hand = hand(dealer=True)
             
+            self.dealer_hand.add_card(self.deck.deal())
+
             for _ in range(2):
                 self.player_hand.add_card(self.deck.deal())
-                self.dealer_hand.add_card(self.deck.deal())
-            
+            print("=======================================================")
+            self.hit_or_stay()
+            print("=======================================================")
+
             game_over = False
             
             while not game_over:
