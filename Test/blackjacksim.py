@@ -1,5 +1,8 @@
 import random
 import numpy as np
+import time
+
+start_time = time.time()
 
 class card: 
     def __init__(self, suit, value):
@@ -107,7 +110,7 @@ class Gameloop:
                 # print(player_hand_value)
 
     def play(self):
-        simulations = 100
+        simulations = int(input("Number of simulations? "))
         results_arr = np.zeros(simulations, dtype=int)
         for index in range(0, simulations):
             self.deck = deck()
@@ -159,7 +162,7 @@ class Gameloop:
             #         break
 
         print(str(simulations) + " Simulations")
-        print(results_arr) 
+        # print(results_arr) 
         player_wins = np.count_nonzero(results_arr == 1)
         dealer_wins = np.count_nonzero(results_arr == 2)
         ties = np.count_nonzero(results_arr == 3)
@@ -169,6 +172,7 @@ class Gameloop:
         print(str(player_percent) + "%")
         print(str(dealer_percent) + "%")
         print(str(ties_percent) + "%")
+        print(str(time.time() - start_time) + " seconds")
         
 
     # def check_for_blackjack(self):
