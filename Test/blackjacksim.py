@@ -83,31 +83,39 @@ class Gameloop:
 
         while stay == False:
             if (dealer_hand_value == 2 or dealer_hand_value == 3) and (player_hand_value < 13):
-                # print("dealer = 2 or 3 and player <13")
-                # print(dealer_hand_value)
-                # print(player_hand_value)
                 self.player_hand.add_card(self.deck.deal())
                 player_hand_value = self.player_hand.get_value()
 
             elif (dealer_hand_value == 4 or dealer_hand_value == 5 or dealer_hand_value == 6) and (player_hand_value < 12):
-                # print("dealer = 4,5,6 and player<12")
-                # print(dealer_hand_value)
-                # print(player_hand_value)
                 self.player_hand.add_card(self.deck.deal())
                 player_hand_value = self.player_hand.get_value()
 
-            elif (dealer_hand_value >= 7 and dealer_hand_value <= 10) and (player_hand_value < 17):
-                # print("dealer = 7-A and player<17")
-                # print(dealer_hand_value)
-                # print(player_hand_value)
+            elif (dealer_hand_value >= 7 and dealer_hand_value <= 11) and (player_hand_value < 17):
                 self.player_hand.add_card(self.deck.deal())
                 player_hand_value = self.player_hand.get_value()
 
             else:
                 stay = True
-                # print("stay")
-                # print(dealer_hand_value)
-                # print(player_hand_value)
+    
+    # def check_for_blackjack(self):
+    #     player_has_blackjack = False
+    #     dealer_has_blackjack = False
+    #     if self.player_hand.get_value() == 21:
+    #         player_has_blackjack = True
+    #     if self.dealer_hand.get_value() == 21:
+    #         dealer_has_blackjack = True
+    #     return player_has_blackjack, dealer_has_blackjack
+    
+    # def show_blackjack_results(self, player_has_blackjack, dealer_has_blackjack):
+    #     if player_has_blackjack == (True, True) and dealer_has_blackjack == (True, True):
+    #         print("Both players have blackjack! It is a draw!")
+        
+    #     elif player_has_blackjack == (True, False):
+    #         print("You have blackjack! You win!")
+        
+    #     elif dealer_has_blackjack == (False, True):
+    #         print("Dealer has blackjack! Dealer wins!")
+ 
 
     def play(self):
         simulations = int(input("Number of simulations? "))
@@ -123,46 +131,31 @@ class Gameloop:
 
             for _ in range(2):
                 self.player_hand.add_card(self.deck.deal())
-            # print("***********")
+
             self.hit_or_stay()
-            # print("==========")
 
             self.dealer_hand.add_card(self.deck.deal())
             self.dealer_draw()
+
             dealer_hand_value = self.dealer_hand.get_value()
-            
             player_hand_value = self.player_hand.get_value()
-            # print("Player:" + str(player_hand_value))
-            # print("Dealer:" + str(dealer_hand_value))
+
+            # player_has_blackjack = self.check_for_blackjack()
+            # dealer_has_blackjack = self.check_for_blackjack()
+            
+            # if player_has_blackjack == True or dealer_has_blackjack == True:
+            #     self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
+            # else:
+            #     break
         
             if dealer_hand_value > 21 or player_hand_value > dealer_hand_value:
-                # player_wins_arr = np.array()
-                # np.append(player_wins_arr, [0])
                 results_arr[index] = 1
             elif player_hand_value == dealer_hand_value:
-                # tie_arr = np.array([0])
-                # np.append(tie_arr, [0])
                 results_arr[index] = 2
             else:
-                # dealer_wins_arr = np.array([])
-                # np.append(dealer_wins_arr, [0])
                 results_arr[index] = 3
 
-
-            # game_over = False
-            
-            # while not game_over:
-            #     player_has_blackjack = self.check_for_blackjack()
-            #     dealer_has_blackjack = self.check_for_blackjack()
-                
-            #     if player_has_blackjack == True or dealer_has_blackjack == True:
-            #         game_over = True
-            #         self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
-            #     else:
-            #         break
-
-        print(str(simulations) + " Simulations")
-        # print(results_arr) 
+        print(str(simulations) + " Simulations") 
         player_wins = np.count_nonzero(results_arr == 1)
         dealer_wins = np.count_nonzero(results_arr == 2)
         ties = np.count_nonzero(results_arr == 3)
@@ -174,29 +167,6 @@ class Gameloop:
         print(str(ties_percent) + "%")
         print(str(time.time() - start_time) + " seconds")
         
-
-    # def check_for_blackjack(self):
-    #     player_has_blackjack = False
-    #     dealer_has_blackjack = False
-    #     if self.player_hand.get_value() == 21:
-    #         player_has_blackjack = True
-    #     if self.dealer_hand.get_value() == 21:
-    #         dealer_has_blackjack = True
-
-    #     return player_has_blackjack, dealer_has_blackjack
-    
-    # def show_blackjack_results(self, player_has_blackjack, dealer_has_blackjack):
-    #     if player_has_blackjack == (True, True) and dealer_has_blackjack == (True, True):
-    #         print("Both players have blackjack! It is a draw!")
-        
-    #     elif player_has_blackjack == (True, False):
-    #         print("You have blackjack! You win!")
-        
-    #     elif dealer_has_blackjack == (False, True):
-    #         print("Dealer has blackjack! Dealer wins!")
-
-    # def player_is_over(self):
-    #     return self.player_hand.get_value() > 21   
     
 if __name__ == "__main__":
     game = Gameloop()
